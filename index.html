@@ -1453,7 +1453,7 @@ body {
     <div class="social-popup" id="socialPopup">
         <div class="popup-header">
             <div class="popup-title">ติดต่อเรา</div>
-            <div class="popup-subtitle">มีปัญหาหรือข้อสงสัย? ทักมาได้เลย</div>
+            <div class="popup-subtitle">มีปัญหาหรือระบบขัดข้อง ทักมาได้เลย</div>
         </div>
         <div class="social-options">
             <button class="social-option facebook" onclick="openFacebook()">
@@ -1656,7 +1656,10 @@ function calculate(days) {
         
         // Then add remaining days
         if (remainingDays > 0) {
-            endDate.setDate(endDate.getDate() + remainingDays);
+            endDate.setDate(endDate.getDate() + (remainingDays - 1));
+        } else {
+            // If no remaining days, subtract 1 day because we count the start date
+            endDate.setDate(endDate.getDate() - 1);
         }
         
         // Handle month overflow (e.g., Jan 31 + 1 month = Feb 28/29)
@@ -1665,8 +1668,9 @@ function calculate(days) {
             endDate.setDate(daysInTargetMonth);
         }
     } else {
-        // For days less than 30, just add days
-        endDate.setDate(startDate.getDate() + days);
+        // For days less than 30, add (days - 1) because we count the start date
+        // Example: 3 days from 29 = 29, 30, 31 (ends on 31)
+        endDate.setDate(startDate.getDate() + (days - 1));
     }
 
     finalDateText = formatDate(endDate);
