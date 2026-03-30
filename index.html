@@ -1645,36 +1645,14 @@ function calculate(days) {
     const startDate = getStartDate();
     let endDate = new Date(startDate);
 
-    // Special case: 1 day = next day (start date + 1)
+    // Special case: 1 day = start date + 1 day
     if (days === 1) {
         endDate.setDate(startDate.getDate() + 1);
     }
-    // Calculate using actual calendar months
-    else if (days >= 30) {
-        // Calculate months and remaining days
-        let monthsToAdd = Math.floor(days / 30);
-        let remainingDays = days % 30;
-        
-        // Add months first
-        endDate.setMonth(startDate.getMonth() + monthsToAdd);
-        
-        // Then add remaining days
-        if (remainingDays > 0) {
-            endDate.setDate(endDate.getDate() + (remainingDays - 1));
-        } else {
-            // If no remaining days, subtract 1 day because we count the start date
-            endDate.setDate(endDate.getDate() - 1);
-        }
-        
-        // Handle month overflow (e.g., Jan 31 + 1 month = Feb 28/29)
-        const daysInTargetMonth = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0).getDate();
-        if (endDate.getDate() > daysInTargetMonth) {
-            endDate.setDate(daysInTargetMonth);
-        }
-    } else {
-        // For days 3-29, add (days - 1) because we count the start date
-        // Example: 3 days from 29 = 29, 30, 31 (ends on 31)
-        endDate.setDate(startDate.getDate() + (days - 1));
+    // For all other cases: add the exact number of days (counting start date as day 1)
+    // Example: Start 30/03/2026, select 60 days → 30/03 (day 1) + 59 = 28/05/2026 (day 60)
+    else {
+        endDate.setDate(startDate.getDate() + days - 1);
     }
 
     finalDateText = formatDate(endDate);
