@@ -1427,6 +1427,10 @@ body {
                         <span class="result-label">ระยะเวลา</span>
                         <span class="result-value" id="resultDays">-</span>
                     </div>
+                    <div class="result-row">
+                        <span class="result-label">นับจำนวนวัน</span>
+                        <span class="result-value" id="resultCount">-</span>
+                    </div>
                     <div class="result-highlight">
                         <span class="label">✨ วันหมดอายุ</span>
                         <span class="highlight" id="resultExpire">-</span>
@@ -1649,13 +1653,16 @@ function calculate(days) {
     if (days === 1) {
         endDate.setDate(startDate.getDate() + 1);
     }
-    // For all other cases: add the exact number of days (counting start date as day 1)
-    // Example: Start 30/03/2026, select 60 days → 30/03 (day 1) + 59 = 28/05/2026 (day 60)
+    // For all other cases: add the exact number of days (start date = day 1)
+    // Example: Start 30/03, select 30 days → 30/03 (day 1) + 29 = 28/04 (day 30)
     else {
         endDate.setDate(startDate.getDate() + days - 1);
     }
 
     finalDateText = formatDate(endDate);
+
+    // Calculate actual days count (inclusive from start to end)
+    const actualDays = days === 1 ? 1 : days;
 
     document.getElementById('emptyState').style.display = 'none';
     document.getElementById('resultContent').style.display = 'block';
@@ -1663,6 +1670,7 @@ function calculate(days) {
 
     document.getElementById('resultStart').textContent = formatDate(startDate);
     document.getElementById('resultDays').textContent = formatMonthText(days);
+    document.getElementById('resultCount').textContent = `${actualDays} วัน`;
     document.getElementById('resultExpire').textContent = finalDateText;
 
     document.getElementById("copyBtn").style.display = "block";
