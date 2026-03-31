@@ -1,691 +1,1907 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gang Members - แก็งมาเฟีย</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #fbbf24;
-            --gold-light: #fcd34d;
-            --gold-dark: #d97706;
-            --bronze: #b45309;
-            --dark-bg: #0a0a0f;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(251, 191, 36, 0.15);
-            --card-border-hover: rgba(251, 191, 36, 0.35);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.6);
-            --text-muted: rgba(255, 255, 255, 0.4);
-        }
+<meta charset="UTF-8">
+<title>BIZ-G DAY</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image" href="logo.png">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        html {
-            overflow-x: hidden;
-        }
+<style>
+:root {
+    --primary: #ff1f1f;
+    --primary-light: #ff6b6b;
+    --primary-dark: #cc0000;
+    --success: #10b981;
+    --success-glow: #34d399;
+    --purple: #a855f7;
+    --purple-light: #c084fc;
+    --gold: #fbbf24;
+    --gold-light: #fcd34d;
+    --dark-bg: #0a0a0f;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --card-border-hover: rgba(255, 255, 255, 0.15);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.6);
+    --text-muted: rgba(255, 255, 255, 0.4);
+}
 
-        body {
-            font-family: 'Prompt', sans-serif;
-            background: radial-gradient(ellipse at top, #1a1205 0%, #0a0a0f 40%, #050508 70%, #000000 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
-            overflow-x: hidden;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
 
-        /* Lightweight Background Orbs - CSS only, no blur */
-        .bg-orb {
-            position: fixed;
-            border-radius: 50%;
-            animation: orbFloat 25s ease-in-out infinite;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.5;
-        }
+html, body {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    scroll-behavior: smooth;
+}
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.06), transparent 70%);
-            top: -100px;
-            left: -100px;
-        }
+/* Mobile - Enable scrolling */
+@media (max-width: 950px) {
+    html, body {
+        overflow: auto;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    body {
+        padding: 20px 10px;
+        padding-bottom: 80px;
+    }
+}
 
-        .orb-2 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(180, 83, 9, 0.05), transparent 70%);
-            bottom: -100px;
-            right: -100px;
-            animation-delay: -8s;
-        }
+body {
+    font-family: 'Prompt', sans-serif;
+    background: radial-gradient(ellipse at top, #1a0a0a 0%, #0a0a0f 40%, #050508 70%, #000000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
 
-        .orb-3 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(251, 191, 36, 0.04), transparent 70%);
-            top: 40%;
-            left: 60%;
-            animation-delay: -16s;
-        }
+/* Mobile body - disable flex centering for scrolling */
+@media (max-width: 950px) {
+    body {
+        display: block;
+        padding-top: 40px;
+    }
+}
 
-        @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(20px, -20px) scale(1.05); }
-        }
+/* Smooth entrance animations */
+.app > * {
+    animation: staggerFadeIn 0.4s ease-out backwards;
+}
 
-        /* Simple Particles */
-        .particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
+.app-header { animation-delay: 0.05s; }
+.left-section { animation-delay: 0.1s; }
+.right-section { animation-delay: 0.15s; }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 50%;
-            opacity: 0.4;
-            animation: particleFloat 15s ease-in-out infinite;
-        }
+@keyframes staggerFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-        .particle:nth-child(1) { left: 10%; top: 80%; animation-delay: 0s; }
-        .particle:nth-child(2) { left: 20%; top: 60%; animation-delay: 2s; }
-        .particle:nth-child(3) { left: 35%; top: 90%; animation-delay: 4s; }
-        .particle:nth-child(4) { left: 50%; top: 70%; animation-delay: 1s; }
-        .particle:nth-child(5) { left: 65%; top: 85%; animation-delay: 3s; }
-        .particle:nth-child(6) { left: 80%; top: 65%; animation-delay: 5s; }
-        .particle:nth-child(7) { left: 90%; top: 75%; animation-delay: 2.5s; }
+/* Animated Background Orbs - Very Light */
+.bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+}
 
-        @keyframes particleFloat {
-            0%, 100% { transform: translateY(0); opacity: 0.3; }
-            50% { transform: translateY(-30px); opacity: 0.6; }
-        }
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(255, 31, 31, 0.06), transparent 70%);
+    top: -150px;
+    left: -150px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10;
-        }
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.05), transparent 70%);
+    bottom: -100px;
+    right: -100px;
+}
 
-        /* Header */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 30px 0;
-        }
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.03), transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
-        .logo-container {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            animation: logoFloat 4s ease-in-out infinite;
-        }
+/* Floating Particles - Disabled for performance */
+.particles {
+    display: none;
+}
 
-        @keyframes logoFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+/* Main App Container */
+.app {
+    width: 900px;
+    padding: 40px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 0 1px var(--card-border);
+    color: var(--text-primary);
+    position: relative;
+    z-index: 10;
+}
 
-        .logo-crown {
-            font-size: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--bronze) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
-        h1 {
-            font-family: 'Kanit', sans-serif;
-            font-size: 40px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, var(--gold-light) 35%, var(--gold) 65%, var(--bronze) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
+.app-header .logo {
+    width: 60px;
+    height: auto;
+    filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.5));
+    animation: logoFloat 4s ease-in-out infinite;
+}
 
-        .subtitle {
-            font-size: 15px;
-            color: var(--text-secondary);
-            font-weight: 300;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-        }
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
 
-        .divider {
-            width: 100px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-            margin: 20px auto;
-            border-radius: 2px;
-        }
+.app-header h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #ffb3b3 35%, #ff6b6b 65%, #ff1f1f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    text-shadow: 0 0 60px rgba(255, 107, 107, 0.4);
+}
 
-        /* Stats Grid */
-        .gang-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 45px;
-        }
+.app-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        .stat-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 25px 20px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
+/* Divider Line */
+.header-divider {
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    margin: 16px auto;
+    border-radius: 2px;
+}
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--card-border-hover);
-            background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.03) 100%);
-        }
+/* Main Layout */
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 28px;
+}
 
-        .stat-number {
-            font-family: 'Kanit', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--bronze) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: all 0.3s ease;
-        }
+/* Left Section */
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+}
 
-        .stat-card:hover .stat-number {
-            transform: scale(1.05);
-        }
+/* Date Mode Toggle - Premium */
+.date-toggle {
+    display: flex;
+    gap: 8px;
+    background: var(--card-bg);
+    padding: 8px;
+    border-radius: 18px;
+    border: 1px solid var(--card-border);
+    box-shadow: 
+        inset 0 2px 15px rgba(0,0,0,0.3),
+        0 0 0 1px rgba(255,255,255,0.05);
+    position: relative;
+    z-index: 25;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
 
-        .stat-label {
-            color: var(--text-secondary);
-            margin-top: 8px;
-            font-size: 13px;
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+.date-toggle:hover {
+    box-shadow: 
+        inset 0 2px 20px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(255,255,255,0.1),
+        0 4px 15px rgba(0,0,0,0.3);
+}
 
-        /* Members Section */
-        .members-section {
-            margin-bottom: 40px;
-        }
+.toggle-btn {
+    flex: 1;
+    padding: 14px 24px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
 
-        .section-title {
-            font-family: 'Kanit', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.toggle-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
 
-        .section-title::before {
-            content: "";
-            width: 4px;
-            height: 26px;
-            background: linear-gradient(180deg, var(--gold-light), var(--bronze));
-            border-radius: 2px;
-        }
+.toggle-btn:hover::before {
+    transform: translateX(100%);
+}
 
-        .members-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-            gap: 20px;
-        }
+.toggle-btn.today {
+    background: var(--success);
+    color: #fff;
+}
 
-        .member-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
-            border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 28px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+.toggle-btn.today.active {
+    background: var(--success-glow);
+}
 
-        .member-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--bronze), var(--gold), var(--gold-light));
-            border-radius: 20px 20px 0 0;
-        }
+.toggle-btn.custom {
+    background: transparent;
+    color: var(--text-secondary);
+}
 
-        .member-card:hover {
-            transform: translateY(-6px);
-            border-color: var(--card-border-hover);
-            background: linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
-            box-shadow: 0 20px 50px rgba(251, 191, 36, 0.15);
-        }
+.toggle-btn.custom.active {
+    background: var(--purple);
+    color: #fff;
+}
 
-        .member-card:hover .member-avatar {
-            transform: scale(1.08);
-            box-shadow: 0 12px 35px rgba(251, 191, 36, 0.4);
-        }
+/* Date Display Card */
+.date-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 24px;
+    background: rgba(16, 185, 129, 0.1);
+    border-radius: 18px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    position: relative;
+    z-index: 25;
+}
 
-        .member-content {
-            position: relative;
-            z-index: 1;
-        }
+.date-display .icon {
+    font-size: 22px;
+}
 
-        .member-avatar {
-            width: 85px;
-            height: 85px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--bronze) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0a0a0f;
-            border: 3px solid rgba(251, 191, 36, 0.3);
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(251, 191, 36, 0.25);
-            font-family: 'Kanit', sans-serif;
-        }
+.date-display .text {
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
 
-        .member-name {
-            font-family: 'Kanit', sans-serif;
-            font-size: 1.4rem;
-            color: var(--text-primary);
-            text-align: center;
-            margin-bottom: 6px;
-            font-weight: 700;
-        }
+.date-display .date {
+    font-family: 'Kanit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--success-glow);
+}
 
-        .member-role {
-            color: var(--gold);
-            text-align: center;
-            font-size: 0.92rem;
-            margin-bottom: 18px;
-            font-style: italic;
-            font-weight: 400;
-        }
+/* Date Input Container */
+.date-input-container {
+    overflow: visible;
+    position: relative;
+    z-index: 20;
+}
 
-        .member-info {
-            border-top: 1px solid rgba(255,255,255,0.08);
-            padding-top: 16px;
-        }
+.date-input-container.hidden {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
 
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 0.88rem;
-            transition: all 0.2s ease;
-        }
+.date-input-container.visible {
+    max-height: 180px;
+    opacity: 1;
+    visibility: visible;
+}
 
-        .info-row:hover {
-            background: rgba(255,255,255,0.03);
-            margin: 0 -8px;
-            padding: 6px 8px;
-            border-radius: 6px;
-        }
+/* Date Input Fields */
+.date-input-wrapper {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 18px;
+    border: 1px solid var(--card-border);
+    position: relative;
+    z-index: 30;
+}
 
-        .info-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 11px;
-        }
+.date-input-wrapper:focus-within {
+    border-color: var(--primary);
+}
 
-        .info-value {
-            color: var(--text-primary);
-            font-weight: 500;
-            text-align: right;
-        }
+.date-input-label {
+    font-family: 'Kanit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.5px;
+}
 
-        .rank-badge {
-            display: inline-block;
-            padding: 7px 18px;
-            border-radius: 18px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            margin-top: 14px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-        }
+.date-input-label .icon {
+    font-size: 16px;
+}
 
-        .rank-badge:hover {
-            transform: scale(1.05);
-        }
+.date-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
 
-        .rank-boss {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--bronze) 100%);
-            color: #0a0a0f;
-            box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4);
-        }
+.date-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-        .rank-underboss {
-            background: linear-gradient(135deg, var(--gold) 0%, var(--bronze) 100%);
-            color: #0a0a0f;
-            box-shadow: 0 6px 20px rgba(180, 83, 9, 0.4);
-        }
+.date-field label {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        .rank-capo {
-            background: linear-gradient(135deg, var(--bronze) 0%, var(--gold-dark) 100%);
-            color: var(--text-primary);
-            box-shadow: 0 5px 18px rgba(180, 83, 9, 0.35);
-        }
+.date-field input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    background: rgba(255,255,255,0.06);
+    color: var(--text-primary);
+    font-family: 'Kanit', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+}
 
-        .rank-soldier {
-            background: linear-gradient(135deg, rgba(180, 83, 9, 0.5) 0%, rgba(139, 69, 19, 0.7) 100%);
-            color: var(--text-primary);
-            box-shadow: 0 5px 18px rgba(139, 69, 19, 0.35);
-        }
+.date-field input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255,255,255,0.1);
+}
 
-        .rank-associate {
-            background: linear-gradient(135deg, rgba(100, 80, 30, 0.5) 0%, rgba(139, 69, 19, 0.6) 100%);
-            color: var(--text-primary);
-            box-shadow: 0 5px 18px rgba(100, 80, 30, 0.35);
-        }
+.date-field input::placeholder {
+    color: var(--text-muted);
+}
 
-        .rank-container {
-            text-align: center;
-            margin-top: 14px;
-        }
+/* Days Container - Scrollable */
+.days-container {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid var(--card-border);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
 
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 35px 0 20px;
-            margin-top: 50px;
-            border-top: 1px solid var(--card-border);
-            color: var(--text-secondary);
-        }
+.days-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--card-bg), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
 
-        .footer-ornament {
-            font-size: 24px;
-            color: var(--gold);
-            margin-bottom: 12px;
-            display: inline-block;
-        }
+.days-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(to top, var(--card-bg), transparent);
+    pointer-events: none;
+    z-index: 10;
+}
 
-        footer p {
-            font-size: 13px;
-            letter-spacing: 1px;
-        }
+.days-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 10px;
+    padding-left: 2px;
+    scrollbar-gutter: stable;
+    position: relative;
+    z-index: 5;
+}
 
-        .footer-tagline {
-            margin-top: 10px;
-            font-size: 11px;
-            color: var(--gold);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-        }
+/* Premium Scrollbar */
+.days-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px 15px;
-            }
+.days-wrapper::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+}
 
-            h1 {
-                font-size: 30px;
-            }
+.days-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary) 100%);
+    border-radius: 12px;
+    border: 2px solid rgba(0,0,0,0.4);
+    box-shadow: 0 0 20px rgba(255, 31, 31, 0.3);
+}
 
-            .members-grid {
-                grid-template-columns: 1fr;
-            }
+.days-wrapper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 50%, var(--primary-light) 100%);
+    box-shadow: 0 0 30px rgba(255, 31, 31, 0.5);
+}
 
-            .gang-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+.days {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    position: relative;
+    z-index: 3;
+    padding: 8px 4px;
+    margin: 4px 0;
+}
 
-            .stat-number {
-                font-size: 2.2rem;
-            }
-        }
-    </style>
+/* Day Button */
+.day-btn {
+    position: relative;
+    padding: 16px 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text-primary);
+    background: rgba(255,255,255,0.05);
+    transition: all 0.2s ease;
+}
+
+.day-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255, 107, 107, 0.3);
+}
+
+.day-btn.active {
+    background: rgba(255, 31, 31, 0.2);
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(255, 31, 31, 0.3);
+}
+
+/* Right Section */
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Result Card */
+.result-card {
+    flex: 1;
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 320px;
+    position: relative;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--text-muted);
+    font-size: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.empty-state .icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+    display: inline-block;
+}
+
+.empty-state .text {
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+.result-content {
+    position: relative;
+    z-index: 1;
+    margin-top: 8px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.result-row:first-child {
+    padding-top: 0;
+}
+
+.result-row:hover {
+    background: rgba(255,255,255,0.03);
+    margin: 0 -10px;
+    padding: 14px 10px;
+    border-radius: 10px;
+    border-color: rgba(255,255,255,0.1);
+}
+
+.result-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.result-value {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+.result-highlight {
+    margin-top: 18px;
+    padding-top: 20px;
+    border-top: 2px solid rgba(255, 31, 31, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.result-highlight .label {
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.highlight {
+    font-family: 'Kanit', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff 0%, #e6e6e67e 40%, #ffffff 70%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 1px;
+    text-shadow: 0 0 50px rgba(255, 255, 255, 0.589);
+}
+
+/* Copy Button */
+.copy-btn {
+    width: 100%;
+    padding: 20px;
+    border-radius: 18px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--success);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    display: none;
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    background: var(--success-glow);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.copy-btn:active {
+    transform: scale(0.98);
+}
+
+/* Toast - Right Side (Copy Notification) */
+.toast-right {
+    position: fixed;
+    right: -400px;
+    bottom: 100px;
+    padding: 14px 28px;
+    border-radius: 50px;
+    background: rgba(16, 185, 129, 0.95);
+    backdrop-filter: blur(10px);
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 40px rgba(16, 185, 129, 0.3);
+    z-index: 10000;
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55), opacity 0.4s ease;
+    opacity: 0;
+    pointer-events: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toast-right.show {
+    right: 20px;
+    opacity: 1;
+}
+
+.toast-right .icon {
+    font-size: 18px;
+    animation: checkBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.3s both;
+}
+
+@keyframes checkBounce {
+    0% { 
+        transform: scale(0) rotate(-45deg); 
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.3) rotate(10deg);
+        opacity: 1;
+    }
+    70% {
+        transform: scale(0.9) rotate(-5deg);
+    }
+    100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Mobile toast */
+@media (max-width: 950px) {
+    .toast-right {
+        bottom: 90px;
+        right: -400px;
+        padding: 12px 24px;
+        font-size: 13px;
+        max-width: calc(100% - 40px);
+        left: 20px;
+        border-radius: 40px;
+    }
+    
+    .toast-right.show {
+        right: 20px;
+        left: 20px;
+    }
+}
+
+/* Social Contact Button - Single Question Mark Button */
+.social-contact {
+    position: fixed;
+    bottom: 8px;
+    right: 8px;
+    z-index: 9999;
+}
+
+/* Mobile social contact - handled in responsive section */
+
+.social-toggle-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 700;
+    font-family: 'Kanit', sans-serif;
+    color: #fff;
+    background: #ff1f1f;
+    box-shadow: 0 4px 12px rgba(255, 31, 31, 0.4);
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: socialPulse 3s ease-in-out infinite;
+}
+
+.social-toggle-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.social-toggle-btn.active {
+    transform: rotate(180deg) scale(0.95);
+}
+
+@keyframes socialPulse {
+    0%, 100% { 
+        box-shadow: 0 4px 12px rgba(255, 31, 31, 0.4);
+    }
+    50% { 
+        box-shadow: 0 6px 20px rgba(255, 31, 31, 0.6);
+    }
+}
+
+/* Social Popup Menu */
+.social-popup {
+    position: absolute;
+    bottom: 65px;
+    right: 0;
+    background: rgba(20, 20, 25, 0.98);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    min-width: 220px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.social-popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.social-popup .popup-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.social-popup .popup-title {
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.5px;
+}
+
+.social-popup .popup-subtitle {
+    font-family: 'Prompt', sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 4px;
+}
+
+/* Quick Links Popup Section */
+.quick-links-popup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.quick-link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.quick-link-btn:hover {
+    opacity: 0.8;
+}
+
+.quick-link-btn.sheet {
+    background: #1a73e8;
+    color: #fff;
+}
+
+.quick-link-btn.web {
+    background: #ff1f1f;
+    color: #fff;
+}
+
+.quick-link-btn .link-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+/* Quick Links Divider */
+.quick-links-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    margin: 8px 0 16px 0;
+}
+
+.social-popup .social-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+}
+
+.social-option:hover {
+    opacity: 0.8;
+}
+
+.social-option.facebook {
+    background: #1877f2;
+    color: #fff;
+}
+
+.social-option.discord {
+    background: #5865f2;
+    color: #fff;
+}
+
+.social-option .option-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-option .option-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.social-option .option-label {
+    flex: 1;
+    text-align: left;
+}
+
+.social-option .option-action {
+    font-size: 11px;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+/* App Logo Container */
+.app-logo-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    backdrop-filter: blur(10px);
+    border-radius: 0 16px 0 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    border-right: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,31,31,0.1);
+}
+
+/* Mobile - reposition logo and social */
+@media (max-width: 950px) {
+    .app-logo-container {
+        bottom: auto;
+        top: 10px;
+        left: 10px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.15);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255,31,31,0.1);
+    }
+
+    .social-contact {
+        bottom: 10px;
+        right: 10px;
+        top: auto;
+    }
+}
+
+.app-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(255,31,31,0.5));
+    animation: logoGlow 3s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255,31,31,0.5)); }
+    50% { filter: drop-shadow(0 0 20px rgba(255,31,31,0.8)); }
+}
+
+/* Animations */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.result-card.show .result-content {
+    animation: fadeUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.result-card.show .highlight {
+    animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+}
+
+/* Responsive */
+@media (max-width: 950px) {
+    .app {
+        width: 95%;
+        padding: 24px;
+        margin: 0 auto;
+        position: relative;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .right-section {
+        order: 2;
+    }
+
+    .left-section {
+        order: 1;
+    }
+
+    .result-card {
+        min-height: 180px;
+        padding: 20px;
+    }
+
+    /* Adjust days grid for mobile - 2 columns */
+    .days {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .day-btn {
+        padding: 16px 12px;
+        font-size: 13px;
+    }
+
+    /* Adjust toast-right for mobile */
+    .toast-right {
+        bottom: 90px;
+        right: -400px;
+        padding: 12px 20px;
+        font-size: 13px;
+        max-width: calc(100% - 40px);
+        left: 20px;
+    }
+
+    .toast-right.show {
+        right: 20px;
+        left: 20px;
+    }
+
+    /* Adjust social popup for mobile - make it scrollable */
+    .social-popup {
+        min-width: 280px;
+        max-height: 70vh;
+        overflow-y: auto;
+        right: -10px;
+        bottom: 70px;
+    }
+
+    .social-popup::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .social-popup::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.03);
+        border-radius: 8px;
+    }
+
+    .social-popup::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.2);
+        border-radius: 8px;
+    }
+
+    /* Show social buttons on mobile */
+    .social-contact {
+        display: block;
+    }
+
+    /* Show app logo on mobile */
+    .app-logo-container {
+        display: block;
+    }
+
+    /* Adjust quick links for mobile */
+    .quick-link-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .quick-link-btn .link-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Fix date input for mobile */
+    .date-fields {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+    }
+
+    .date-field input {
+        font-size: 16px;
+        padding: 12px 10px;
+    }
+
+    /* Fix days container for mobile */
+    .days-container {
+        min-height: auto;
+        max-height: 280px;
+        padding: 14px;
+    }
+
+    .days-wrapper {
+        max-height: 220px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 8px;
+    }
+
+    /* Premium Scrollbar for mobile days */
+    .days-wrapper::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .days-wrapper::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.03);
+        border-radius: 8px;
+    }
+
+    .days-wrapper::-webkit-scrollbar-thumb {
+        background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(255, 31, 31, 0.3);
+    }
+
+    .days-wrapper::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(180deg, var(--primary-light) 0%, var(--primary) 100%);
+        box-shadow: 0 0 15px rgba(255, 31, 31, 0.5);
+    }
+
+    .days {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .day-btn {
+        padding: 16px 12px;
+        font-size: 13px;
+        border-radius: 12px;
+    }
+
+    /* Header for mobile/tablet */
+    .app-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .app-header .logo {
+        width: 50px;
+    }
+
+    .app-header h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .app-header p {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    /* Date toggle for mobile/tablet */
+    .date-toggle {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .toggle-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    /* Date display for mobile/tablet */
+    .date-display {
+        padding: 14px 18px;
+    }
+
+    .date-display .date {
+        font-size: 16px;
+    }
+
+    /* Date input for mobile/tablet */
+    .date-input-wrapper {
+        padding: 16px;
+    }
+
+    /* Result highlight for mobile/tablet */
+    .highlight {
+        font-size: 24px;
+    }
+}
+
+/* Extra small mobile */
+@media (max-width: 480px) {
+    .app {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .app-header {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .app-header h1 {
+        font-size: 20px;
+    }
+
+    .app-header p {
+        font-size: 11px;
+    }
+
+    .app-header .logo {
+        width: 45px;
+    }
+
+    .days {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .day-btn {
+        padding: 14px 10px;
+        font-size: 12px;
+        border-radius: 12px;
+    }
+
+    .social-popup {
+        min-width: 260px;
+        right: -20px;
+        padding: 16px;
+        max-height: 65vh;
+    }
+
+    .quick-links-popup {
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .quick-link-btn {
+        padding: 12px 14px;
+        gap: 8px;
+    }
+
+    .quick-link-btn span {
+        font-size: 13px;
+    }
+
+    .result-card {
+        padding: 18px;
+    }
+
+    .highlight {
+        font-size: 20px;
+    }
+
+    /* Date toggle for mobile */
+    .date-toggle {
+        padding: 6px;
+        gap: 6px;
+    }
+
+    .toggle-btn {
+        padding: 12px 14px;
+        font-size: 12px;
+    }
+
+    /* Date display for mobile */
+    .date-display {
+        padding: 12px 16px;
+    }
+
+    .date-display .date {
+        font-size: 15px;
+    }
+
+    /* Date input for mobile */
+    .date-input-wrapper {
+        padding: 14px;
+    }
+
+    .date-field input {
+        font-size: 14px;
+        padding: 10px 8px;
+    }
+
+    /* Days container for mobile */
+    .days-container {
+        min-height: auto;
+        max-height: 260px;
+        padding: 14px;
+    }
+
+    .days-wrapper {
+        max-height: 200px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 6px;
+    }
+
+    /* Premium Scrollbar for small mobile days */
+    .days-wrapper::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .days-wrapper::-webkit-scrollbar-track {
+        background: rgba(255,255,255,0.03);
+        border-radius: 6px;
+    }
+
+    .days-wrapper::-webkit-scrollbar-thumb {
+        background: var(--primary);
+        border-radius: 6px;
+    }
+
+    .days {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .day-btn {
+        padding: 14px 10px;
+        font-size: 12px;
+        border-radius: 12px;
+    }
+
+    /* Copy button for mobile */
+    .copy-btn {
+        padding: 14px;
+        font-size: 14px;
+    }
+}
+</style>
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
-    <div class="bg-orb orb-3"></div>
-    
-    <div class="particles">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+
+<div class="particles">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div class="app">
+    <div class="app-header">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h1>คำนวณวันหมดอายุ</h1>
+        <p>Premium Day calculation system</p>
+        <div class="header-divider"></div>
     </div>
 
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <div class="logo-crown">♛</div>
+    <div class="main-layout">
+        <!-- Left Section -->
+        <div class="left-section">
+            <div class="date-toggle">
+                <button class="toggle-btn today active" id="todayBtn" onclick="setTodayMode()">
+                    📌 วันนี้
+                </button>
+                <button class="toggle-btn custom" id="customBtn" onclick="setCustomMode()">
+                    ✏️ เลือกวันเอง
+                </button>
             </div>
-            <h1>GANG MEMBERS</h1>
-            <p class="subtitle">รายชื่อสมาชิกแก็งมาเฟีย</p>
-            <div class="divider"></div>
-        </header>
 
-        <div class="gang-stats">
-            <div class="stat-card">
-                <div class="stat-number" id="total-members">0</div>
-                <div class="stat-label">สมาชิกทั้งหมด</div>
+            <div class="date-display" id="todayDisplay">
+                <span class="icon">✅</span>
+                <span class="text">วันเริ่มต้น</span>
+                <span class="date" id="todayDate">-</span>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-capos">0</div>
-                <div class="stat-label">หัวหน้าแก๊ง</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-soldiers">0</div>
-                <div class="stat-label">ลูกน้อง</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="total-territories">0</div>
-                <div class="stat-label">เขตอำนาจ</div>
-            </div>
-        </div>
 
-        <div class="members-section">
-            <h2 class="section-title">สมาชิกทั้งหมด</h2>
-            <div class="members-grid" id="members-grid">
-                <!-- Member cards will be inserted here -->
-            </div>
-        </div>
-
-        <footer>
-            <div class="footer-ornament">♛</div>
-            <p>&copy; 2026 Gang Member List. All Rights Reserved.</p>
-            <p class="footer-tagline">อำนาจ • เกียรติ • ศักดิ์ศรี</p>
-        </footer>
-    </div>
-
-    <script>
-        const gangMembers = [
-            {
-                id: 1,
-                name: "วิชัย สิงห์ทอง",
-                nickname: "เสี่ยวิชัย",
-                role: "หัวหน้าใหญ่",
-                rank: "boss",
-                age: 52,
-                territory: "กรุงเทพฯ",
-                specialty: "บริหารธุรกิจ"
-            },
-            {
-                id: 2,
-                name: "สมชาย ดุร้าย",
-                nickname: "เสือสมชาย",
-                role: "รองหัวหน้า",
-                rank: "underboss",
-                age: 45,
-                territory: "ธนบุรี",
-                specialty: "ยุทธการ"
-            },
-            {
-                id: 3,
-                name: "ประยุทธ เหยี่ยวดำ",
-                nickname: "เหยี่ยวประยุทธ",
-                role: "หัวหน้าแก๊ง",
-                rank: "capo",
-                age: 38,
-                territory: "บางกอกน้อย",
-                specialty: "สืบสวน"
-            },
-            {
-                id: 4,
-                name: "สมศักดิ์ ดุจฟ้า",
-                nickname: "ฟ้าสมศักดิ์",
-                role: "สมาชิก",
-                rank: "soldier",
-                age: 32,
-                territory: "บางพลัด",
-                specialty: "การเงิน"
-            },
-            {
-                id: 5,
-                name: "มานะ กล้าหาญ",
-                nickname: "ทิดมานะ",
-                role: "สมาชิก",
-                rank: "soldier",
-                age: 29,
-                territory: "ตลิ่งชัน",
-                specialty: "โลจิสติกส์"
-            },
-            {
-                id: 6,
-                name: "วิไล เพชรทอง",
-                nickname: "เพชรวิไล",
-                role: "สมาชิก",
-                rank: "soldier",
-                age: 35,
-                territory: "บางแค",
-                specialty: "เจรจา"
-            },
-            {
-                id: 7,
-                name: "สมหวัง มั่นคง",
-                nickname: "หวังสมหวัง",
-                role: "ผู้ร่วมงาน",
-                rank: "associate",
-                age: 27,
-                territory: "ภาษีเจริญ",
-                specialty: "ไอที"
-            },
-            {
-                id: 8,
-                name: "สุชาติ นักรบ",
-                nickname: "ชาติสุชาติ",
-                role: "สมาชิก",
-                rank: "soldier",
-                age: 31,
-                territory: "บางบอน",
-                specialty: "รักษาความปลอดภัย"
-            }
-        ];
-
-        const rankLabels = {
-            boss: "BOSS",
-            underboss: "UNDERBOSS",
-            capo: "CAPO",
-            soldier: "SOLDIER",
-            associate: "ASSOCIATE"
-        };
-
-        function getInitials(name) {
-            return name.charAt(0);
-        }
-
-        function renderMembers() {
-            const grid = document.getElementById('members-grid');
-            grid.innerHTML = '';
-
-            gangMembers.forEach((member, index) => {
-                const card = document.createElement('div');
-                card.className = 'member-card';
-                card.style.animation = `fadeInUp 0.5s ease ${index * 0.08}s backwards`;
-                card.innerHTML = `
-                    <div class="member-content">
-                        <div class="member-avatar">${getInitials(member.name)}</div>
-                        <h3 class="member-name">${member.nickname}</h3>
-                        <p class="member-role">${member.role}</p>
-                        <div class="member-info">
-                            <div class="info-row">
-                                <span class="info-label">ชื่อจริง</span>
-                                <span class="info-value">${member.name}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="info-label">อายุ</span>
-                                <span class="info-value">${member.age} ปี</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="info-label">เขต</span>
-                                <span class="info-value">${member.territory}</span>
-                            </div>
-                            <div class="info-row">
-                                <span class="info-label">ความเชี่ยวชาญ</span>
-                                <span class="info-value">${member.specialty}</span>
-                            </div>
-                            <div class="rank-container">
-                                <span class="rank-badge rank-${member.rank}">${rankLabels[member.rank]}</span>
-                            </div>
+            <div class="date-input-container hidden" id="dateInputContainer">
+                <div class="date-input-wrapper">
+                    <div class="date-input-label">
+                        <span class="icon">🗓️</span>
+                        <span>กรุณากรอกวันเริ่มต้น</span>
+                    </div>
+                    <div class="date-fields">
+                        <div class="date-field">
+                            <label>วัน</label>
+                            <input type="text" id="inputDay" placeholder="DD" maxlength="2" oninput="validateDay(this)">
+                        </div>
+                        <div class="date-field">
+                            <label>เดือน</label>
+                            <input type="text" id="inputMonth" placeholder="MM" maxlength="2" oninput="validateMonth(this)">
+                        </div>
+                        <div class="date-field">
+                            <label>ปี</label>
+                            <input type="text" id="inputYear" placeholder="YYYY" maxlength="4" oninput="validateYear(this)">
                         </div>
                     </div>
-                `;
-                grid.appendChild(card);
-            });
+                </div>
+            </div>
+
+            <div class="days-container">
+                <div class="days-wrapper">
+                    <div class="days">
+                        <button class="day-btn" onclick="selectDay(this,1)"><span>1 วัน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,3)"><span>3 วัน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,7)"><span>7 วัน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,14)"><span>14 วัน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,30)"><span>1 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,60)"><span>2 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,90)"><span>3 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,120)"><span>4 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,150)"><span>5 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,180)"><span>6 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,210)"><span>7 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,240)"><span>8 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,270)"><span>9 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,300)"><span>10 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,330)"><span>11 เดือน</span></button>
+                        <button class="day-btn" onclick="selectDay(this,365)"><span>1 ปี</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <div class="result-card" id="resultCard">
+                <div class="empty-state" id="emptyState">
+                    <div class="icon">📅</div>
+                    <div class="text">เลือกจำนวนวันที่ต้องการ</div>
+                </div>
+                <div class="result-content" id="resultContent" style="display: none;">
+                    <div class="result-row">
+                        <span class="result-label">วันเริ่มต้น</span>
+                        <span class="result-value" id="resultStart">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">ระยะเวลา</span>
+                        <span class="result-value" id="resultDays">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">จำนวนวันที่นับ</span>
+                        <span class="result-value" id="resultCount">-</span>
+                    </div>
+                    <div class="result-highlight">
+                        <span class="label">✨ วันหมดอายุ</span>
+                        <span class="highlight" id="resultExpire">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="copy-btn" id="copyBtn" onclick="copyDate()">
+                📋 คัดลอกวันหมดอายุ
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Right Side Toast Notification -->
+<div class="toast-right" id="toastRight">
+    <span class="icon">✅</span>
+    <span>คัดลอกวันหมดอายุเรียบร้อยแล้ว</span>
+</div>
+
+<!-- Social Contact Button -->
+<div class="social-contact">
+    <button class="social-toggle-btn" id="socialToggleBtn" onclick="toggleSocialPopup()">?</button>
+    <div class="social-popup" id="socialPopup">
+        <div class="popup-header">
+            <div class="popup-title">ติดต่อเรา</div>
+            <div class="popup-subtitle">ปัญหาหรือระบบขัดข้อง ทักมาได้เลย</div>
+        </div>
+        <div class="social-options">
+            <!-- Social Options (Top) -->
+            <button class="social-option facebook" onclick="openFacebook()">
+                <span class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                    </svg>
+                </span>
+                <span class="option-label">Facebook</span>
+                <span class="option-action">เปิดโปรไฟล์</span>
+            </button>
+            <button class="social-option discord" onclick="copyDiscord()">
+                <span class="option-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+                    </svg>
+                </span>
+                <span class="option-label">Discord</span>
+                <span class="option-action">คัดลอกชื่อผู้ใช้</span>
+            </button>
+            <!-- Divider -->
+            <div class="quick-links-divider"></div>
+            <!-- Quick Links Section (Bottom) -->
+            <div class="quick-links-popup">
+                <button class="quick-link-btn sheet" onclick="openGoogleSheet()">
+                    <img src="logo.png" alt="Logo" class="link-icon">
+                    <span>Sheet BIZ-G</span>
+                </button>
+                <button class="quick-link-btn web" onclick="openBizGPlus()">
+                    <img src="logo.png" alt="Logo" class="link-icon">
+                    <span>BIZ-G CODE</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+let finalDateText = "";
+let isTodayMode = true;
+let selectedDays = null;
+
+const formatDate = (d) => {
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+
+const formatMonthText = (days) => {
+    if (days >= 365 && days % 365 === 0) {
+        const years = days / 365;
+        return `${years} ปี`;
+    }
+    if (days >= 30 && days % 30 === 0) {
+        const months = days / 30;
+        return `${months} เดือน`;
+    }
+    return `${days} วัน`;
+};
+
+// Get days in month
+function getDaysInMonth(month, year) {
+    return new Date(year, month, 0).getDate();
+}
+
+// Validate Day input (check actual days in selected month)
+function validateDay(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+    if (input.value.length > 0) {
+        let val = parseInt(input.value);
+        const month = parseInt(document.getElementById('inputMonth').value) || 1;
+        const year = parseInt(document.getElementById('inputYear').value) || new Date().getFullYear();
+        const maxDays = getDaysInMonth(month, year);
+
+        if (val > maxDays) {
+            input.value = String(maxDays).padStart(2, '0');
+            showDayWarning(maxDays, month);
         }
+        if (val < 1 && input.value !== '') input.value = '1';
+    }
+    // Auto-update date when all fields are filled
+    checkAndUpdateDate();
+}
 
-        function updateStats() {
-            document.getElementById('total-members').textContent = gangMembers.length;
-            document.getElementById('total-capos').textContent = gangMembers.filter(m => m.rank === 'capo' || m.rank === 'boss' || m.rank === 'underboss').length;
-            document.getElementById('total-soldiers').textContent = gangMembers.filter(m => m.rank === 'soldier').length;
-            document.getElementById('total-territories').textContent = new Set(gangMembers.map(m => m.territory)).size;
+// Show warning when day exceeds month limit
+function showDayWarning(maxDays, month) {
+    const monthNames = ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.',
+                        'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.'];
+    showToast(`⚠️ เดือน ${monthNames[month-1]} มีสูงสุด ${maxDays} วัน`, "warning");
+}
+
+// Validate Month input (1-12)
+function validateMonth(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
+    if (input.value.length > 0) {
+        let val = parseInt(input.value);
+        if (val > 12) input.value = '12';
+        if (val < 1 && input.value !== '') input.value = '1';
+
+        // Re-validate day when month changes
+        const dayInput = document.getElementById('inputDay');
+        if (dayInput.value) {
+            validateDay(dayInput);
         }
+    }
+    // Auto-update date when all fields are filled
+    checkAndUpdateDate();
+}
 
-        // Add fadeInUp animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fadeInUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(20px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-        `;
-        document.head.appendChild(style);
+// Validate Year input (4 digits)
+function validateYear(input) {
+    input.value = input.value.replace(/[^0-9]/g, '');
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMembers();
-            updateStats();
-        });
-    </script>
+    // Re-validate day when year changes (for leap year)
+    const dayInput = document.getElementById('inputDay');
+    const monthInput = document.getElementById('inputMonth');
+    if (dayInput.value && monthInput.value) {
+        validateDay(dayInput);
+    }
+    // Auto-update date when all fields are filled
+    checkAndUpdateDate();
+}
+
+// Get date from input fields
+function getInputDate() {
+    const day = parseInt(document.getElementById('inputDay').value) || 1;
+    const month = parseInt(document.getElementById('inputMonth').value) || 1;
+    const year = parseInt(document.getElementById('inputYear').value) || new Date().getFullYear();
+    
+    return new Date(year, month - 1, day);
+}
+
+// Set input fields to a date
+function setInputDate(date) {
+    document.getElementById('inputDay').value = String(date.getDate()).padStart(2, '0');
+    document.getElementById('inputMonth').value = String(date.getMonth() + 1).padStart(2, '0');
+    document.getElementById('inputYear').value = String(date.getFullYear());
+}
+
+// Check if all date fields are filled and update display
+function checkAndUpdateDate() {
+    const dayVal = document.getElementById('inputDay').value;
+    const monthVal = document.getElementById('inputMonth').value;
+    const yearVal = document.getElementById('inputYear').value;
+
+    // Only update if all fields have values
+    if (dayVal && monthVal && yearVal) {
+        const day = parseInt(dayVal) || 1;
+        const month = parseInt(monthVal) || 1;
+        const year = parseInt(yearVal) || new Date().getFullYear();
+        const customDate = new Date(year, month - 1, day);
+        document.getElementById('todayDate').textContent = formatDate(customDate);
+        
+        // Auto-calculate if a day has been selected
+        if (selectedDays && !isTodayMode) {
+            calculateFromCustomDate();
+        }
+    }
+}
+
+// Open Google Sheet
+function openGoogleSheet() {
+    window.open('https://docs.google.com/spreadsheets/d/1_ulE4CrKnsCjlzyz0N-n94yEep1OsQub7LBgUbSLDUs/edit?pli=1&gid=289997355#gid=289997355', '_blank');
+}
+
+// Open BIZ-G Plus
+function openBizGPlus() {
+    window.open('https://bizg-plus.com/codeplus', '_blank');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date();
+    document.getElementById('todayDate').textContent = formatDate(today);
+    setInputDate(today);
+});
+
+function setTodayMode() {
+    isTodayMode = true;
+    document.getElementById('todayBtn').classList.add('active');
+    document.getElementById('todayBtn').classList.remove('custom');
+    document.getElementById('customBtn').classList.remove('active');
+    document.getElementById('customBtn').classList.add('today');
+    
+    document.getElementById('todayDisplay').style.display = 'flex';
+    document.getElementById('dateInputContainer').classList.remove('visible');
+    document.getElementById('dateInputContainer').classList.add('hidden');
+    
+    const today = new Date();
+    document.getElementById('todayDate').textContent = formatDate(today);
+    setInputDate(today);
+    
+    if (selectedDays) {
+        calculate(selectedDays);
+    }
+}
+
+function setCustomMode() {
+    isTodayMode = false;
+    document.getElementById('customBtn').classList.add('active');
+    document.getElementById('customBtn').classList.remove('today');
+    document.getElementById('todayBtn').classList.remove('active');
+    document.getElementById('todayBtn').classList.add('custom');
+
+    document.getElementById('todayDisplay').style.display = 'none';
+    document.getElementById('dateInputContainer').classList.remove('hidden');
+    document.getElementById('dateInputContainer').classList.add('visible');
+
+    setTimeout(() => {
+        document.getElementById('inputDay').focus();
+    }, 300);
+
+    if (selectedDays) {
+        calculateFromCustomDate();
+    }
+}
+
+function getStartDate() {
+    if (isTodayMode) {
+        return new Date();
+    } else {
+        return getInputDate();
+    }
+}
+
+function selectDay(el, days) {
+    // Remove active from all buttons
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+
+    // Add active to clicked button
+    el.classList.add('active');
+
+    // Set selected days and calculate
+    selectedDays = days;
+    calculate(days);
+}
+
+function calculate(days) {
+    const startDate = getStartDate();
+    let endDate = new Date(startDate);
+
+    // Special case: 1 day = start date + 1 day
+    if (days === 1) {
+        endDate.setDate(startDate.getDate() + 1);
+    }
+    // For all other cases: add the exact number of days (start date = day 1)
+    // Example: Start 30/03, select 30 days → 30/03 (day 1) + 29 = 28/04 (day 30)
+    else {
+        endDate.setDate(startDate.getDate() + days - 1);
+    }
+
+    finalDateText = formatDate(endDate);
+
+    // Calculate actual days count (inclusive from start to end)
+    const actualDays = days === 1 ? 1 : days;
+
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('resultContent').style.display = 'block';
+    document.getElementById('resultCard').classList.add('show');
+
+    document.getElementById('resultStart').textContent = formatDate(startDate);
+    document.getElementById('resultDays').textContent = formatMonthText(days);
+    document.getElementById('resultCount').textContent = `${actualDays} วัน`;
+    document.getElementById('resultExpire').textContent = finalDateText;
+
+    document.getElementById("copyBtn").style.display = "block";
+}
+
+function calculateFromCustomDate() {
+    if (selectedDays) {
+        calculate(selectedDays);
+    }
+}
+
+function copyDate() {
+    if (!finalDateText) {
+        showToast("⚠️ ยังไม่มีข้อมูลวันหมดอายุ", "warning");
+        return;
+    }
+
+    navigator.clipboard.writeText(finalDateText).then(() => {
+        showToast("คัดลอกวันหมดอายุเรียบร้อยแล้ว", "success");
+    }).catch(err => {
+        // Fallback: ลองใช้วิธีเก่าถ้า clipboard API ไม่ทำงาน
+        const textArea = document.createElement("textarea");
+        textArea.value = finalDateText;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand("copy");
+            showToast("คัดลอกวันหมดอายุเรียบร้อยแล้ว", "success");
+        } catch (e) {
+            showToast("❌ คัดลอกไม่สำเร็จ กรุณาลองใหม่", "error");
+        }
+        
+        document.body.removeChild(textArea);
+    });
+}
+
+// Show Toast Notification
+function showToast(message, type = "success") {
+    const toastRight = document.getElementById("toastRight");
+
+    // ตั้งค่าสีตามประเภท
+    const colors = {
+        success: 'rgb(16, 185, 129)',
+        error: 'rgb(239, 68, 68)',
+        warning: 'rgb(245, 158, 11)',
+        info: 'rgb(59, 130, 246)'
+    };
+
+    const icons = {
+        success: '✅',
+        error: '❌',
+        warning: '⚠️',
+        info: 'ℹ️'
+    };
+
+    // Hide toast first
+    toastRight.classList.remove('show');
+
+    // Update content and show
+    setTimeout(() => {
+        toastRight.style.background = colors[type] || colors.success;
+        const icon = icons[type] || icons.success;
+        toastRight.innerHTML = `<span class="icon">${icon}</span><span>${message}</span>`;
+        toastRight.classList.add('show');
+
+        // Auto-hide after 2.5 seconds
+        setTimeout(() => {
+            toastRight.classList.remove('show');
+        }, 2500);
+    }, 30);
+}
+
+// Toggle Social Popup
+function toggleSocialPopup() {
+    const popup = document.getElementById('socialPopup');
+    const btn = document.getElementById('socialToggleBtn');
+    popup.classList.toggle('show');
+    btn.classList.toggle('active');
+}
+
+// Close popup when clicking outside
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('socialPopup');
+    const btn = document.getElementById('socialToggleBtn');
+    if (popup && !popup.contains(event.target) && !btn.contains(event.target)) {
+        popup.classList.remove('show');
+        btn.classList.remove('active');
+    }
+});
+
+// Open Facebook
+function openFacebook() {
+    // Add click animation
+    const btn = document.querySelector('.social-option.facebook');
+    btn.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        btn.style.transform = '';
+    }, 150);
+
+    // Open Facebook profile in new tab
+    window.open('https://www.facebook.com/bank.kub.448958', '_blank');
+
+    // Close popup
+    setTimeout(() => {
+        const popup = document.getElementById('socialPopup');
+        const toggleBtn = document.getElementById('socialToggleBtn');
+        popup.classList.remove('show');
+        toggleBtn.classList.remove('active');
+    }, 200);
+}
+
+// Copy Discord Username
+function copyDiscord() {
+    const discordUsername = "Bankkizz._"; // เปลี่ยนเป็นชื่อ Discord ของคุณ
+
+    navigator.clipboard.writeText(discordUsername).then(() => {
+        showToast(`✅ คัดลอกชื่อ Discord แล้ว: ${discordUsername}`, "info");
+
+        // Close popup
+        const popup = document.getElementById('socialPopup');
+        const toggleBtn = document.getElementById('socialToggleBtn');
+        popup.classList.remove('show');
+        toggleBtn.classList.remove('active');
+    }).catch(err => {
+        // Fallback: ลองใช้วิธีเก่า
+        const textArea = document.createElement("textarea");
+        textArea.value = discordUsername;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        document.body.appendChild(textArea);
+        textArea.select();
+        
+        try {
+            document.execCommand("copy");
+            showToast(`✅ คัดลอกชื่อ Discord แล้ว: ${discordUsername}`, "info");
+        } catch (e) {
+            showToast("❌ คัดลอกไม่สำเร็จ กรุณาลองใหม่", "error");
+        }
+        
+        document.body.removeChild(textArea);
+
+        // Close popup
+        const popup = document.getElementById('socialPopup');
+        const toggleBtn = document.getElementById('socialToggleBtn');
+        popup.classList.remove('show');
+        toggleBtn.classList.remove('active');
+    });
+}
+</script>
+
 </body>
 </html>
